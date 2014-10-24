@@ -35,9 +35,14 @@ pushd /tmp/build
   mkdir -p /app/php/ext
   cp /app/apache/lib/libapr-1.so.0 /app/php/ext
   cp /app/apache/lib/libaprutil-1.so.0 /app/php/ext
+  cp /usr/lib/libXpm.so.4.11.0 /app/php/ext
+  cp /usr/lib/libXpm.a /app/php/ext
   pushd /app/php/ext
     ln -s libapr-1.so.0 libapr-1.so
     ln -s libaprutil-1.so.0 libaprutil-1.so
+
+    ln -s libXpm.so.4 libXpm.so.4.11.0
+    ln -s libXpm.so libXpm.so.4.11.0
   popd
 
   # php
@@ -48,7 +53,7 @@ pushd /tmp/build
       --enable-soap=shared --enable-libxml --enable-simplexml --enable-session \
       --with-xmlrpc --with-openssl --enable-mbstring --with-bz2 --with-zlib \
       --with-gd --with-freetype-dir=/usr/lib --with-jpeg-dir=/usr/lib \
-      --with-png-dir=/usr/lib --with-xpm-dir=/usr/lib
+      --with-png-dir=/usr/lib --with-xpm-dir=/app/php/ext
     make
     make install
   popd
